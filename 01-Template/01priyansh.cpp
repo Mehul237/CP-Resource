@@ -1,3 +1,5 @@
+// Link -> https://www.codechef.com/viewsolution/67637722
+
 #pragma GCC optimize("O3,unroll-loops")
 
 #include<bits/stdc++.h>
