@@ -1,5 +1,5 @@
 
-// link --
+// link -- https://cses.fi/paste/0bddef99786f9bdb6c7e09/
 
 #include <bits/stdc++.h>
 using namespace std;
