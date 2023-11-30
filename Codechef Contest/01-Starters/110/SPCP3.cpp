@@ -25,11 +25,24 @@ void solve() {
   N -= X;   // remaining girls
   
   // Calculate the remaining students after forming groups
-  N %= K;   // girls 
-  X %= K;   // boys
+  N %= K;   // remGirls = (n - x) % k;
+  X %= K;   // remBoys
 
   // Output the minimum number of students who will be engaged in reading
-  cout << max(N, X) - min(N, X) << "\n";
+  cout << abs(N - X) << "\n";                // remG - remB, first comes into my mind is this intuition
+  cout << max(N, X) - min(N, X) << "\n";     // Same thing over here!
+  cout << N + X - 2 * min(N, X) << "\n";    // Maths form
+
+
+
+
+/*
+----------------------------------------------------------------------------------------------------
+Ranking - https://www.codechef.com/rankings/START110A?itemsPerPage=100&order=asc&page=1&sortBy=rank
+esomer - https://www.codechef.com/viewsolution/1032428060
+ninsti - https://www.codechef.com/viewsolution/1032428523 
+----------------------------------------------------------------------------------------------------
+*/
   
 }
 
