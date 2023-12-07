@@ -128,7 +128,7 @@ int main() {
    -- O(1) for initializing the vow map
    -- O(1) for checking vowels for each character in the string (constant lookup in the map)
    -- O(1) for printing the output
-   -- O(t1) for the main loop iterating over test cases
+   -- O(t1) for the main loop iterating over test cases 
   
 <strong>Space Complexity:</strong> O(1)
   - O(1) for variables and constants in memory
