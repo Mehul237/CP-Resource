@@ -12,3 +12,6 @@ Optimized, <br>
 [2. Rajawat Banna](https://rajawatbanna.github.io/rtucoders/solution.html)
 <br>
 [3. Raghav Goel](https://github.com/itzRaghav14/cses/tree/main/introductory-problems)
+
+Live Stream, <br>
+[12 Hour Livestream (150 Question) - William Lin](https://www.youtube.com/live/dZ_6MS14Mg4?feature=shared)
