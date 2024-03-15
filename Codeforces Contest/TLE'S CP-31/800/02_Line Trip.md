@@ -4,30 +4,49 @@
 
 ```cpp
 
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
 using namespace std;
- 
+
+void solve() {  
+
+  int n, x;
+  cin >> n >> x;
+    
+  vector<int> a(n);
+  for(int i=0; i<n; i++) {
+    cin >> a[i];
+  }
+    
+  int ans = 0;
+  int last = 0;
+    
+  for(int i=0; i<n; i++) {
+    ans = max(ans, a[i] - last);
+     // cout << "Ans -> " << ans << "\n";
+    last = a[i];
+     // cout << "Last -> " << last << "\n";
+  }
+    
+  ans = max(ans, 2*(x - a[n - 1]));  
+  cout << ans << "\n"; 
+}
+
+
+
 int main() {
 
-  int t;
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+    
+  int t = 1;
   cin >> t;
-
-  while (t--) {
-
-    int n, x;
-    cin >> n >> x;
-
-    int prev = 0, ans = 0;
-
-    for (int i=0, a; i<n; ++i) {
-      cin >> a;
-      ans = max(ans, a - prev);
-      prev = a;
-    }
-
-    ans = max(ans, 2 * (x - prev));
-    cout << ans << '\n';
+    
+  for(int tc=1; tc<=t; tc++) {
+    solve ();
   }
+    
+  return 0;
 }
 
 ```
