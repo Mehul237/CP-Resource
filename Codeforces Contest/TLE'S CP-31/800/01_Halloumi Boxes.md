@@ -36,3 +36,55 @@ int main() {
 }
 
 ```
+
+<br>
+
+```cpp
+
+#include <bits/stdc++.h>
+using namespace std;
+
+bool is_sorted1(vector<int> &vec) {
+  for(int i=1; i<vec.size(); ++i) {
+
+    // If the current element is less than the previous one, 
+    // it indicates that the vector is not sorted, so the function returns false.
+    if (vec[i] < vec[i - 1]) {
+      return false;
+    }
+  }
+
+  // If loop completes without returning false, vector is sorted
+  return true;
+}
+
+
+
+int main() {
+
+  int t;
+  cin >> t;
+
+  while(t--) {
+
+    int n, k;
+    cin >> n >> k;
+        
+    vector<int> ans;
+
+    for(int i=0, x; i<n; i++) {
+      cin >> x;
+      ans.push_back(x);
+    }
+
+    // cout << ((k > 1 || is_sorted(ans.begin(), ans.end())) ? "YES\n" : "NO\n" );
+    cout << ((k > 1 || is_sorted1(ans))? "YES\n" : "NO\n" );
+  }
+
+
+
+  return 0;
+
+}
+
+```
