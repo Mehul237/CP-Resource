@@ -1,3 +1,6 @@
+![Screenshot 2025-04-24 154842](https://github.com/user-attachments/assets/1ee9854b-cf68-4a04-9463-051a69f9d064)
+
+
 ```cpp
 
 #include <bits/stdc++.h>
