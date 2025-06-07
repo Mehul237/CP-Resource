@@ -432,3 +432,272 @@ signed main()
 */
 
 ```
+
+<hr>
+<br>
+
+```cpp
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+You are the one that is responsible for who you are!                                                                   +
+6-Months of FOCUS & HARDWORK can put you 5-YEARS ahead in life. Don't Underestimate the power of CONSISTENCY & DESIRE  +
+
+When talent doesn't work hard then hardwork beats talent... | Trilasha, Same batch and same CF Situation (Same month and same rating)
+...hardwork always pays off                                 | but she try to level up and me GIVE UP!
+
+------------------------------------------------------------------------------------------------------------------------
+
+***********************
+ Mehul Thuletiya      *
+ CF: Parzival_237     *
+ CC: mehul_237        *
+***********************
+
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+using ll = long long;
+#define nline "\n"
+const int MOD = 1e9 + 7;
+
+void parzival_237() {
+
+  // 1. Problem given statement
+  // -------------------------------------------------------------
+  // You are given:
+  // - n food items, each has:
+  //     * A[i] = vitamin type (can be duplicate)
+  //     * B[i] = cost to buy
+  // - You need only one of each vitamin type.
+  // - You can buy some items and upgrade cost to at least 'c' if needed.
+  // Goal:
+  // - Minimize total amount of money needed to upgrade bought items to cost >= c
+  //   while buying only distinct vitamin types.
+  // -------------------------------------------------------------
+
+  // 2. According to problem take input here,
+  ll n, c;
+  cin >> n >> c;
+
+  vector<ll> vitamin_type(n);    // A[i]
+  vector<ll> vitamin_cost(n);    // B[i]
+
+  for (auto &x : vitamin_type) cin >> x;
+  for (auto &x : vitamin_cost) cin >> x;
+
+  // 3. Problem Logic start here,
+  map<ll, ll> min_cost_idx;
+
+  // Filter out duplicates — keep only the item with minimum cost for each vitamin type
+  for (ll i = 0; i < n; i++) {
+    if (min_cost_idx.find(vitamin_type[i]) != min_cost_idx.end()) {
+      ll existing_idx = min_cost_idx[vitamin_type[i]];
+      if (vitamin_cost[i] < vitamin_cost[existing_idx]) {
+        vitamin_cost[existing_idx] = -1; // mark previous as invalid
+        min_cost_idx[vitamin_type[i]] = i;
+      } else {
+        vitamin_cost[i] = -1; // current one is more costly, discard
+      }
+    } else {
+      min_cost_idx[vitamin_type[i]] = i;
+    }
+  }
+
+  // Collect valid vitamin costs after filtering
+  vector<ll> final_costs;
+  for (ll i = 0; i < n; i++) {
+    if (vitamin_cost[i] != -1)
+      final_costs.push_back(vitamin_cost[i]);
+  }
+
+  // 4. Problem analysis
+  // Final answer: sum over all final costs where cost < c → (c - cost)
+  ll total_upgrade_cost = 0;
+  for (ll cost : final_costs) {
+    if (cost < c) {
+      total_upgrade_cost += (c - cost);
+    }
+  }
+
+  // Output answer
+  cout << total_upgrade_cost << nline;
+
+  // TC: O(N log N) due to map and filtering
+  // SC: O(N) for extra arrays and map
+}  
+
+int main() {
+
+  ios_base::sync_with_stdio(false);
+  cin.tie(NULL);
+  cout.tie(NULL);
+
+  int t1; 
+  cin >> t1;
+
+  while(t1--) {
+    parzival_237();
+  } 
+
+  return 0;
+}
+
+```
+
+<hr>
+
+
+# 💡 Problem Breakdown and Edge Case Analysis
+
+---
+
+## 🧠 Problem Statement Summary
+
+You are given:
+- `N` food items
+- Each item has a **vitamin type** `A[i]` and a **cost** `B[i]`
+- An integer parameter `C` is given.
+
+### Goal:
+You want to **buy** some food items such that:
+- You only keep **one item per vitamin type** (keep the one with the lowest cost).
+- For each kept item, if its cost is less than `C`, you must **upgrade** it, which costs: `C - B[i]`
+
+#### ✅ You need to calculate the **total upgrade cost** required.
+
+---
+
+## ✍️ Implementation Steps
+
+1. Input `n` and `c`
+2. Read array `A[n]` (vitamin types)
+3. Read array `B[n]` (costs)
+4. Use a `map<ll,ll>` to track **minimum cost per vitamin type**
+5. For each repeated vitamin type, retain the **minimum cost** and **invalidate** the rest (set to `-1`)
+6. Collect valid costs (`B[i] != -1`)
+7. For each such cost, if `< c`, add `(c - B[i])` to total
+8. Print the total upgrade cost
+
+---
+
+## ✅ Edge Cases to Consider
+
+### 1. Duplicate Vitamin Types With Same Cost
+```
+Input:
+3 10
+1 1 1
+5 5 5
+Output: 5
+```
+- All are same type → keep one → upgrade: `10 - 5 = 5`
+
+---
+
+### 2. All Items Already Cost ≥ C
+```
+Input:
+4 10
+1 2 3 4
+10 20 15 12
+Output: 0
+```
+- No upgrade needed → all costs ≥ C
+
+---
+
+### 3. All Costs Less Than C
+```
+Input:
+3 5
+1 2 3
+1 1 1
+Output: 12
+```
+- Upgrade all: `3 × (5 - 1) = 12`
+
+---
+
+### 4. Duplicate Vitamin Types With Varying Cost
+```
+Input:
+4 10
+1 1 2 2
+8 5 12 9
+Output: 6
+```
+- Type 1: min(8, 5) = 5 → upgrade = 5
+- Type 2: min(12, 9) = 9 → upgrade = 1
+- Total = 6
+
+---
+
+### 5. No Items at All
+```
+Input:
+0 5
+(empty)
+Output: 0
+```
+- Nothing to upgrade
+
+---
+
+### 6. All Items of Same Vitamin Type
+```
+Input:
+5 10
+2 2 2 2 2
+1 2 3 4 5
+Output: 9
+```
+- Keep min cost (1) → upgrade: `10 - 1 = 9`
+
+---
+
+### 7. All Items Same Vitamin Type and Already ≥ C
+```
+Input:
+3 7
+3 3 3
+9 10 15
+Output: 0
+```
+- Keep one → already ≥ 7 → no upgrade
+
+---
+
+## ⚠️ Notes
+
+- Always ensure to only count one food item per vitamin type.
+- Make sure to only upgrade if cost `< C`.
+- Invalidated duplicates must be ignored (`B[i] = -1`).
+
+---
+
+## 📦 Time and Space Complexity
+
+- **Time Complexity**: `O(N log N)` (due to sorting and map operations)
+- **Space Complexity**: `O(N)` (for storing vitamin cost mapping and filtered costs)
+
+## ✅ Summary of Steps:
+- Input parsing
+- Map usage to store the minimum cost per vitamin type
+- Filter duplicates
+- Check which ones need upgrading (cost < c)
+- Sum required upgrades
+
+## 🚫 Need to Handle Carefully:
+- Marking duplicates properly: Avoid accidentally using two of the same vitamin type.
+- Updating cost array correctly when overwriting entries in the map.
+- Avoid unnecessary upgrades for costs already >= c.
+
+## 🧠 Additional Suggestions:
+- If you’re using map<ll,ll> to store vitamin -> index, make sure that when replacing the index (for smaller cost), you mark the old index as invalid (-1 in cost).
+- Only include valid (non -1) items in the final cost vector before checking for cost < c.
+
+---
+
