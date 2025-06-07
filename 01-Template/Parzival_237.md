@@ -29,16 +29,20 @@ const int MOD = 1e9 + 7;
 
 void parzival_237() {
 
-  // According to problem take input here,
+  // 1. Problem given statement
 
+  // 2. According to problem take input here,
 
-  // Problem Logic start here,
+  // 3. Problem Logic start here,
 
+  // Edge case: Minor idea, Pillar of issue not mentioned in problem
 
+  // Cover boundary issue: What to do if it is >, < or =
+
+  // 4. Problem analysis
   // TC: 
   // SC: 
-}  
-
+}   
 
 
 int main() {
